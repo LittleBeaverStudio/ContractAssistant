@@ -1,0 +1,101 @@
+{
+  "_note": "本文件为离线/演示用示例数据。仅在本机未检测到「小河狸合同助手」时由 client 的演示模式返回，用于在无桌面应用环境下展示输出结构与字段形态。真实使用时由本机应用返回真实数据，不会读取本文件。",
+  "info": {
+    "success": true,
+    "data": {
+      "app": "小河狸合同助手",
+      "version": "1.0.5",
+      "modules": ["合同台账", "履约节点", "业务单", "期初锚点", "节点发票匹配", "往来单位库", "内置体检"],
+      "endpoints": ["health", "info", "companies", "summary", "contracts", "contract-nodes", "contract-links", "biz-entries", "projects", "coverage", "expiring", "parties"]
+    }
+  },
+  "health": {
+    "success": true,
+    "data": {"status": "ok", "app": "小河狸合同助手", "version": "1.0.5"}
+  },
+  "companies": {
+    "success": true,
+    "data": [
+      {"id": 1, "name": "北京埃诺登口腔医疗科技有限公司", "tax_no": "91110108XXXXXXXXXX", "alias": "埃诺登"},
+      {"id": 2, "name": "广州景安宏悦医疗投资有限公司", "tax_no": "91440101XXXXXXXXXX", "alias": "景安宏悦"}
+    ]
+  },
+  "summary": {
+    "success": true,
+    "data": {
+      "company_id": 1,
+      "contract_count": 128,
+      "direction": {"销售": 86, "采购": 42},
+      "status": {"active": 95, "terminated": 18, "voided": 15},
+      "amount_total": 8642000.00,
+      "node_progress": {"planned": 320, "done": 241, "overdue": 12},
+      "coverage": {"covered": 113, "gap": 15}
+    }
+  },
+  "contracts": {
+    "success": true,
+    "data": [
+      {"id": 1001, "company_id": 1, "code": "HT-2026-0001", "name": "种植体采购框架合同", "direction": "采购", "type": "框架", "status": "active", "party": "某某医疗器械有限公司", "amount": 1200000.00, "sign_date": "2026-01-15", "expire_date": "2026-12-31", "remark": ""},
+      {"id": 1002, "company_id": 1, "code": "HT-2026-0002", "name": "诊室装修施工合同", "direction": "采购", "type": "一次性", "status": "active", "party": "某某装饰工程有限公司", "amount": 480000.00, "sign_date": "2026-02-20", "expire_date": "2026-08-30", "remark": ""},
+      {"id": 1003, "company_id": 1, "code": "HT-2026-0003", "name": "种植服务合作协议", "direction": "销售", "type": "年度", "status": "active", "party": "某某口腔医院", "amount": 2600000.00, "sign_date": "2026-03-01", "expire_date": "2027-02-28", "remark": ""}
+    ],
+    "page": 1,
+    "page_size": 50,
+    "total": 128
+  },
+  "contract-nodes": {
+    "success": true,
+    "data": [
+      {"id": 2001, "contract_id": 1001, "name": "首付款节点", "plan_date": "2026-01-31", "actual_date": "2026-01-29", "status": "done", "amount": 360000.00},
+      {"id": 2002, "contract_id": 1001, "name": "到货验收节点", "plan_date": "2026-03-15", "actual_date": null, "status": "pending", "amount": 480000.00},
+      {"id": 2003, "contract_id": 1003, "name": "季度结算节点", "plan_date": "2026-06-30", "actual_date": null, "status": "overdue", "amount": 650000.00}
+    ]
+  },
+  "contract-links": {
+    "success": true,
+    "data": [
+      {"parent_code": "HT-2026-0001", "child_code": "HT-2026-0001-A", "relation": "补充协议"}
+    ]
+  },
+  "biz-entries": {
+    "success": true,
+    "data": [
+      {"id": 3001, "contract_id": 1001, "biz_type": "采购入库", "biz_no": "RK-2026-0123", "date": "2026-03-10", "amount": 480000.00},
+      {"id": 3002, "contract_id": 1003, "biz_type": "销售开票", "biz_no": "XS-2026-0456", "date": "2026-04-12", "amount": 650000.00}
+    ]
+  },
+  "projects": {
+    "success": true,
+    "data": [
+      {"id": 4001, "name": "2026 种植中心建设", "contract_count": 12, "node_done": 28, "node_total": 36, "amount": 3200000.00}
+    ]
+  },
+  "coverage": {
+    "success": true,
+    "data": {
+      "company_id": 1,
+      "total": 128,
+      "voided_excluded": 15,
+      "covered": 113,
+      "gap": 15,
+      "risk_points": ["HT-2026-0003 季度结算节点已逾期", "HT-2026-0002 即将于 2026-08-30 到期"]
+    }
+  },
+  "expiring": {
+    "success": true,
+    "data": [
+      {"id": 1002, "code": "HT-2026-0002", "name": "诊室装修施工合同", "party": "某某装饰工程有限公司", "expire_date": "2026-08-30", "amount": 480000.00, "days_left": 75, "status": "active"},
+      {"id": 1004, "code": "HT-2026-0004", "name": "设备租赁合同", "party": "某某设备租赁有限公司", "expire_date": "2026-07-15", "amount": 220000.00, "days_left": 30, "status": "active"}
+    ]
+  },
+  "parties": {
+    "success": true,
+    "data": [
+      {"id": 5001, "name": "某某医疗器械有限公司", "role": "供应商", "contract_count": 9, "amount": 3600000.00, "auto_matched": true},
+      {"id": 5002, "name": "某某口腔医院", "role": "客户", "contract_count": 14, "amount": 5200000.00, "auto_matched": true},
+      {"id": 5003, "name": "某某装饰工程有限公司", "role": "供应商", "contract_count": 3, "amount": 720000.00, "auto_matched": false}
+    ]
+    ,
+    "keyword": "口腔"
+  }
+}

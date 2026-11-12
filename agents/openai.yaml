@@ -1,0 +1,4 @@
+interface:
+  display_name: "小河狸合同助手"
+  short_description: "连接本机小河狸合同助手，查询合同台账、履约节点、即将到期提醒与往来单位汇总"
+  default_prompt: "使用 $littlebeaver-contract-assistant 连接本机小河狸合同助手，汇总并分析我的合同台账。"
